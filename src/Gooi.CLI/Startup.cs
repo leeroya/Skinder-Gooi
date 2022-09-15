@@ -1,14 +1,10 @@
 ﻿using CommandLine;
 using MediatR;
-using Spectre.Console;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Spectre.Console;
 
-using Gooi.Core.Infrastructure;
-using Gooi.Core.Options;
-
-namespace Gooi.CLI;
+namespace Skinder.Gooi.CLI;
 public class Startup
 {
   private readonly IHost _host;

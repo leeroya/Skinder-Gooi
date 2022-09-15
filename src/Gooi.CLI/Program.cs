@@ -1,18 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text;
+using FluentValidation.Results;
 using MediatR;
-using Serilog;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ILogger = Microsoft.Extensions.Logging.ILogger;
-using Gooi.Core.Infrastructure;
-using Gooi.Core.Options;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using Serilog.Events;
-using FluentValidation.Results;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
-namespace Gooi.CLI;
+namespace Skinder.Gooi.CLI;
 class Program
 {
   private static IInfrastructureOutputWriter? _outputWriter;
@@ -88,11 +86,11 @@ class Program
 
     if (e.ExceptionObject is Exception ex)
     {
-      if (_logger != null) _logger.LogError("{Message}", ex.Message);
+      _logger?.LogError("{Message}", ex.Message);
 
       errorBuilder.AppendLine($"Error: {ex.Message}");
 
-      if (ex is ValidationException error)
+      if (ex is FluentValidation.ValidationException error)
       {
         foreach (ValidationFailure validationFailure in error.Errors)
         {

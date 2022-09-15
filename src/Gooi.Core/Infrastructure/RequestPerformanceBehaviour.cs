@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using System.Diagnostics;
+using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 
-namespace Gooi.Core.Infrastructure;
+namespace Skinder.Gooi.Core.Infrastructure;
 
 public class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {

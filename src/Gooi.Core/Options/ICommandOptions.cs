@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace Gooi.Core.Options
+namespace Skinder.Gooi.Core.Options
 {
   public interface ICommandOptions
   {

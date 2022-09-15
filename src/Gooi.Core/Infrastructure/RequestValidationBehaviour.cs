@@ -1,7 +1,7 @@
-﻿using MediatR;
-using FluentValidation;
+﻿using FluentValidation;
+using MediatR;
 
-namespace Gooi.Core.Infrastructure;
+namespace Skinder.Gooi.Core.Infrastructure;
 public class RequestValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
   private readonly IEnumerable<IValidator<TRequest>> _validators;

@@ -1,9 +1,9 @@
 ﻿using ConsoleTableExt;
-using Gooi.Core.Options;
 using Microsoft.Extensions.Logging;
+using Skinder.Gooi.Core.Options;
 using Spectre.Console;
 
-namespace Gooi.Core.Infrastructure;
+namespace Skinder.Gooi.Core.Infrastructure;
 public class AnsiOutputWriter : IInfrastructureOutputWriter
 {
   private const string ColourHeading1 = "deepskyblue1";
@@ -119,7 +119,10 @@ public class AnsiOutputWriter : IInfrastructureOutputWriter
 
   public void WriteException(Exception? ex)
   {
-    AnsiConsole.WriteException(ex);
+    if (ex != null)
+    {
+      AnsiConsole.WriteException(ex);
+    }
   }
 
   public Tree CreateTree(string title)
@@ -131,5 +134,4 @@ public class AnsiOutputWriter : IInfrastructureOutputWriter
   {
     AnsiConsole.Write(root);
   }
-}
 }

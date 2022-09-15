@@ -1,4 +1,4 @@
-﻿namespace gooi.azure;
+﻿namespace Skinder.Gooi.Azure;
 public class Class1
 {
 
