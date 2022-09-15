@@ -1,0 +1,1 @@
+global using Skinder.Gooi.Azure;

@@ -1,4 +1,4 @@
-﻿namespace Gooi.Core.Options;
+﻿namespace Skinder.Gooi.Core.Options;
 public enum HeadingLevel
 {
   Level1 = 1,
