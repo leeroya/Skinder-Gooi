@@ -27,8 +27,10 @@ internal class Program
     internal static IHostBuilder CreateHostBuilder() 
     {
         return new HostBuilder()
-        .ConfigureServices((hostConfig, services) => { 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+        .ConfigureServices((hostConfig, services) => {
+          services.AddScoped<Startup>();
+          services.AddScoped<ICommandOptions, DemoCommand>();
+          services.AddMediatR(Assembly.GetExecutingAssembly());
         });
     }
 }
