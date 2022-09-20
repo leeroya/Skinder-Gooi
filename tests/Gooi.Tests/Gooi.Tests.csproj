@@ -21,4 +21,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Gooi.Domain\Gooi.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Gooi.Core\Gooi.Core.csproj" />
+  </ItemGroup>
+
 </Project>
