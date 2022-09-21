@@ -4,7 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>Skinder.Gooi.Azure</AssemblyName>
     <RootNamespace>Skinder.Gooi.Azure</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gooi.Core\Gooi.Core.csproj" />
+  </ItemGroup>
 
 </Project>
