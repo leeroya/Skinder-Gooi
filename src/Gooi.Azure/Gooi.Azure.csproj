@@ -8,4 +8,8 @@
     <RootNamespace>Skinder.Gooi.Azure</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gooi.Core\Gooi.Core.csproj" />
+  </ItemGroup>
+
 </Project>

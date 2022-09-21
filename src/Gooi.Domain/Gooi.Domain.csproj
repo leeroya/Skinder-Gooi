@@ -13,6 +13,10 @@
     <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gooi.Azure\Gooi.Azure.csproj" />
     <ProjectReference Include="..\Gooi.Core\Gooi.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features" />
   </ItemGroup>
 </Project>
