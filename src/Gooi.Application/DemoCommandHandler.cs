@@ -1,7 +1,7 @@
 
 using MediatR;
 
-namespace Gooi.Application;
+namespace Skinder.Gooi.Application;
 
 
  public class DemoCommandHandler : IRequestHandler<DemoCommand, int>

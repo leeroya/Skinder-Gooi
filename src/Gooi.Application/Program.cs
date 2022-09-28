@@ -2,18 +2,10 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Spectre.Console;
-using System;
 using System.Reflection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using global::Skinder.Gooi.Application;
 
-using global::Gooi.Application;
-
-using MediatR.Pipeline;
-
-namespace Gooi.Application;
+namespace Skinder.Gooi.Application;
 internal class Program
 {
     private static async Task<int> Main(string[] args)

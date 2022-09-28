@@ -1,7 +1,7 @@
 using CommandLine;
 using MediatR;
 
-namespace Gooi.Application;
+namespace Skinder.Gooi.Application;
 
 [Verb("demo", HelpText = "Skippy was here.")]
 public class DemoCommand : IRequest<int>, ICommandOptions
