@@ -196,6 +196,9 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+# Jetbrains
+.idea/
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
@@ -348,3 +351,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+.DS_Store
+.gitignore

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>Skinder.Gooi.CLI</AssemblyName>
     <RootNamespace>Skinder.Gooi.CLI</RootNamespace>
     <ToolCommandName>gooi</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
