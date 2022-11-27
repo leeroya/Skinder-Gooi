@@ -27,4 +27,11 @@
     <ProjectReference Include="..\..\src\Gooi.Core\Gooi.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="local.settings.json" />
+    <Content Include="local.settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
