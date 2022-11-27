@@ -8,14 +8,14 @@
     <ToolCommandName>gooi</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackAsTool>true</PackAsTool>
-    <Company>Derivco</Company>
-    <PackageProjectUrl>https://github.com/leeroya/Gooi.git</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/leeroya/Gooi.git</RepositoryUrl>
+    <Company>leeroya</Company>
+    <PackageProjectUrl>https://github.com/skippytime/Skinder-Gooi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/skippytime/Skinder-Gooi.git</RepositoryUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>0.1.3</Version>
+    <Version>0.1.6</Version>
     <PackageId>Gooi.CLI</PackageId>
-    <Authors>Lee-Roy</Authors>
-    <Product>Gooi.CLI</Product>
+    <Authors>Lee-Roy Ashworth</Authors>
+    <Product>Gooi</Product>
     <Description>Dotnet tool, package, stand alone exe and container image that allows sending messages to cloud platforms.</Description>
     <AssemblyName>Gooi</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -23,12 +23,18 @@
     <!--Settings below are for self-contained, trimmed, single-file builds-->
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Gooi.Azure\Gooi.Azure.csproj" />
     <ProjectReference Include="..\Gooi.Contracts\Gooi.Contracts.csproj" />
     <ProjectReference Include="..\Gooi.Core\Gooi.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+      <None Include="..\..\readme.md" Pack="true" PackagePath="">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+  </ItemGroup>
 </Project>

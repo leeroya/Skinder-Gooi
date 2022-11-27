@@ -32,3 +32,5 @@ jobs:
       run: azurite --queueHost 127.0.0.1 --silent --location ./azurite --debug ./azurite/debug.log &
     - name: Test
       run: dotnet test ./Gooi.sln --no-build --verbosity normal
+    - name: Publish
+      run: dotnet pack ./src/Gooi.CLI/Gooi.CLI.csproj -c Release -p:PackageVersion=0.1.${{github.run_id}}
