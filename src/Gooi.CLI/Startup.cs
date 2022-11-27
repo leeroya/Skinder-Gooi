@@ -1,7 +1,7 @@
-﻿using CommandLine;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿
+using Skinder.Gooi.Azure;
+using Skinder.Gooi.Contracts.Interfaces.Infrastructure;
+using Skinder.Gooi.Contracts.Interfaces.Options;
 using Spectre.Console;
 
 namespace Skinder.Gooi.CLI;
@@ -30,7 +30,7 @@ public class Startup
       }
 
       await _mediator.Send(command, cancellationToken);
-      _outputWriter.WriteCompletedMessage($"{Emoji.Known.Detective}  Henchman is done!");
+      _outputWriter.WriteCompletedMessage($"{Emoji.Known.Detective}  Gooi (eng: Throw) is done!");
       return 0;
     }
 
@@ -48,18 +48,66 @@ public class Startup
       settings.EnableDashDash = true;
       settings.CaseSensitive = false;
       settings.HelpWriter = System.Console.Out;
+      settings.AutoVersion = false;
     });
-
-    List<ICommandOptions> commands = _host.Services.GetServices<ICommandOptions>().ToList();
+    
+    var commands = _host.Services.GetServices<IAzureCommandOptions>().ToList();
 
     if (!commands.Any())
     {
-      throw new InvalidOperationException($" {Emoji.Known.WorriedFace} Well this is embarrassing. Henchman does not know what to do.");
+      throw new InvalidOperationException($" {Emoji.Known.WorriedFace} Well this is embarrassing. Gooi (eng: Throw) does not know what to do.");
     }
 
     Type[] types = commands.Select(s => s.GetType()).ToArray();
     var result = parser.ParseArguments(args, types) as Parsed<object>;
 
+    // Display custom help
+    result.WithNotParsed(errs => DisplayHelp(result, errs, types));
     return result;
+  }
+  private void DisplayHelp<T>(ParserResult<T> result, IEnumerable<Error> errs, Type[] types)
+  {
+    if (errs.IsVersion())
+    {
+      // Do Nothing since we are always printing the version.
+      return;
+    }
+
+    var helpText = HelpText.AutoBuild(result,
+      settings =>
+      {
+        settings.AdditionalNewLineAfterOption = false;
+        settings.Heading = string.Empty;
+        settings.Copyright = string.Empty;
+        settings.AddVerbs(types);
+        settings.AddDashesToOption = true;
+        settings.AutoVersion = false;
+        settings.MaximumDisplayWidth = GetMaximumWindowWidth();
+        return HelpText.DefaultParsingErrorsHandler(result, settings);
+      },
+      onExample: e => e,
+      verbsIndex: true);
+
+    _outputWriter.WriteLine(helpText);
+  }
+
+  private int GetMaximumWindowWidth()
+  {
+    var defaultMaximumLength = 80;
+    int maximumDisplayWidth;
+    try
+    {
+      maximumDisplayWidth = Console.WindowWidth;
+      if (maximumDisplayWidth < 1)
+      {
+        return defaultMaximumLength;
+      }
+    }
+    catch (IOException)
+    {
+      return defaultMaximumLength;
+    }
+
+    return maximumDisplayWidth;
   }
 }

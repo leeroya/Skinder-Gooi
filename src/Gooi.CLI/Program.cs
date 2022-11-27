@@ -1,14 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text;
-using FluentValidation.Results;
-using MediatR;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Events;
+﻿
+using Skinder.Gooi.Azure;
+using Skinder.Gooi.Contracts.Interfaces.Infrastructure;
+using Skinder.Gooi.Contracts.Interfaces.Options;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
+
+[assembly: InternalsVisibleTo("Skinder.Gooi.Tests")]
 
 namespace Skinder.Gooi.CLI;
 class Program
@@ -47,17 +43,18 @@ class Program
       )
       .ConfigureServices((hostConfig, services) =>
       {
-        /*services.SetupPushFeature();
-        services.SetupPullRequestFeature();
-        services.SetupCommitFeature();
-        services.SetupProjectFeature();
-        services.SetupCodeRepositoryFeature();
-        services.AddAutoMapper(typeof(AutoMapperProfile));*/
+        services.AddAutoMapper(typeof(Profile));
         services.Scan(c =>
         {
           c.FromAssemblyOf<ICommandOptions>()
             .AddClasses(x => x.NotInNamespaceOf(typeof(RequestPerformanceBehaviour<,>))
-              .Where(type => type.Namespace != null && type.Namespace.Contains("Internal.SDLC")))
+              .Where(type => type.Namespace != null && type.Namespace.Contains("Skinder.Gooi")))
+            .AsImplementedInterfaces()
+            .WithTransientLifetime();
+          
+          c.FromAssemblyOf<IAzureCommandOptions>()
+            .AddClasses(x => x.NotInNamespaceOf(typeof(RequestPerformanceBehaviour<,>))
+              .Where(type => type.Namespace != null && type.Namespace.Contains("Gooi")))
             .AsImplementedInterfaces()
             .WithTransientLifetime();
         });
@@ -66,11 +63,11 @@ class Program
 
         services.AddSingleton<IInfrastructureOutputWriter, AnsiOutputWriter>();
         services.AddMediatR(typeof(Startup));
-
-        /*        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
-                services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLoggerBehaviour<,>));
-                services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehaviour<,>));*/
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehaviour<,>));
+        
       })
+      
       .ConfigureLogging((hostingContext, options) =>
       {
         options.ClearProviders();

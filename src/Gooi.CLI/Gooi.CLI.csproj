@@ -25,6 +25,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gooi.Azure\Gooi.Azure.csproj" />
+    <ProjectReference Include="..\Gooi.Contracts\Gooi.Contracts.csproj" />
     <ProjectReference Include="..\Gooi.Core\Gooi.Core.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,6 @@
-﻿using Skinder.Gooi.Core.Options;
-using Spectre.Console;
+﻿using Spectre.Console;
 
-namespace Skinder.Gooi.Core.Infrastructure;
+namespace Skinder.Gooi.Contracts.Interfaces.Infrastructure;
 public interface IInfrastructureOutputWriter
 {
   Tree CreateTree(string title);
