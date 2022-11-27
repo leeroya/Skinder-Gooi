@@ -27,7 +27,8 @@ jobs:
       run: dotnet build ./Gooi.sln --no-restore
     - name: Install azurite
       run: npm install -g azurite
-    - name: Run azurerite
-      run: azurite --queueHost 127.0.0.1 --silent --location ./azurite --debug ./azurite/debug.log
+    - name: Run Azurite in Background
+      shell: bash
+      run: azurite --queueHost 127.0.0.1 --silent --location ./azurite --debug ./azurite/debug.log &
     - name: Test
       run: dotnet test ./Gooi.sln --no-build --verbosity normal
