@@ -1,4 +1,4 @@
-﻿namespace Skinder.Gooi.Core.Options;
+﻿namespace Skinder.Gooi.Contracts.Interfaces.Infrastructure;
 public enum HeadingLevel
 {
   Level1 = 1,

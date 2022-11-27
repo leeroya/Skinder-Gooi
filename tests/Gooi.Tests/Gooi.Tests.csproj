@@ -4,7 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>Skinder.Gooi.Tests</AssemblyName>
     <RootNamespace>Skinder.Gooi.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -26,6 +25,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Gooi.Azure\Gooi.Azure.csproj" />
     <ProjectReference Include="..\..\src\Gooi.Core\Gooi.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="local.settings.json" />
+    <Content Include="local.settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

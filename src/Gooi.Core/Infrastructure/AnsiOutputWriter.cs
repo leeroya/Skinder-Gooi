@@ -1,6 +1,6 @@
 ﻿using ConsoleTableExt;
 using Microsoft.Extensions.Logging;
-using Skinder.Gooi.Core.Options;
+using Skinder.Gooi.Contracts.Interfaces.Infrastructure;
 using Spectre.Console;
 
 namespace Skinder.Gooi.Core.Infrastructure;

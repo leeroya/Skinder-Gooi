@@ -26,4 +26,8 @@
     <PackageReference Include="Spectre.Console" Version="0.43.0" />
     <PackageReference Include="Spectre.Console.Analyzer" Version="0.43.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Gooi.Contracts\Gooi.Contracts.csproj" />
+  </ItemGroup>
 </Project>

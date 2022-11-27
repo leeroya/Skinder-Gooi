@@ -17,9 +17,18 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+    - name: Setup NodeJs
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
     - name: Restore dependencies
       run: dotnet restore ./Gooi.sln
     - name: Build
       run: dotnet build ./Gooi.sln --no-restore
+    - name: Install azurite
+      run: npm install -g azurite
+    - name: Run Azurite in Background
+      shell: bash
+      run: azurite --queueHost 127.0.0.1 --silent --location ./azurite --debug ./azurite/debug.log &
     - name: Test
       run: dotnet test ./Gooi.sln --no-build --verbosity normal

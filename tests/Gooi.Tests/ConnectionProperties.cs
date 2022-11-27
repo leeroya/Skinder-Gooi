@@ -1,4 +1,5 @@
-using Skinder.Gooi.Core.Options;
+using Skinder.Gooi.Contracts.Interfaces.Options;
+
 
 namespace Skinder.Gooi.Tests;
 

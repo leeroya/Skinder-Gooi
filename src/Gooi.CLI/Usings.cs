@@ -1,0 +1,14 @@
+global using Skinder.Gooi.Core.Infrastructure;
+global using CommandLine;
+global using CommandLine.Text;
+global using MediatR;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using System.Runtime.CompilerServices;
+global using System.Text;
+global using AutoMapper;
+global using FluentValidation.Results;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.Logging;
+global using Serilog;
+global using Serilog.Events;
