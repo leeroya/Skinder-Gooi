@@ -27,8 +27,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Gooi.Contracts\Gooi.Contracts.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Options" />
-  </ItemGroup>
 </Project>

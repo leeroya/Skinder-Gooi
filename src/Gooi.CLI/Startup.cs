@@ -1,7 +1,5 @@
-﻿
-using Skinder.Gooi.Azure;
+﻿using Skinder.Gooi.Azure;
 using Skinder.Gooi.Contracts.Interfaces.Infrastructure;
-using Skinder.Gooi.Contracts.Interfaces.Options;
 using Spectre.Console;
 
 namespace Skinder.Gooi.CLI;
@@ -22,13 +20,8 @@ public class Startup
     _outputWriter.WriteHeading($"Gooi weergawe is: {GetType().Assembly.GetName().Version?.ToString()}", HeadingLevel.Level1);
 
     Parsed<object>? result = ParseArguments(args);
-    if (result != null && result.Value is ICommandOptions command)
+    if (result != null && result.Value is IAzureCommandOptions command)
     {
-      if (command is IConnectionProperties properties)
-      {
-        //_host.Services.GetRequiredService<IDevOpsDataWarehouseRepository>().SetConnectionString(properties);
-      }
-
       await _mediator.Send(command, cancellationToken);
       _outputWriter.WriteCompletedMessage($"{Emoji.Known.Detective}  Gooi (eng: Throw) is done!");
       return 0;
