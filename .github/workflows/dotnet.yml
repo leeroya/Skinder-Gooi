@@ -43,10 +43,10 @@ jobs:
       run: dotnet test ./Gooi.sln --no-build --verbosity normal
 
     - name: Build Linux
-      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o ./artifacts/linux-x64 -c release -r linux-x64 /p:Version="${{ github.run_number }}"
+      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o ./artifacts/linux-x64 -c release -r linux-x64 /p:Version="${{ github.run_number }}" --self-contained
 
     - name: Build Windows
-      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o ./artifacts/win7-x64 -c release -r win7-x64 /p:Version="${{ github.run_number }}"
+      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o ./artifacts/win7-x64 -c release -r win7-x64 /p:Version="${{ github.run_number }}" --self-contained
 
     - name: Compress
       shell: bash
