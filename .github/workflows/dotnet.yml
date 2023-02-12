@@ -1,11 +1,11 @@
 name: .NET
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+# on:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+on: [push]
 jobs:
   build:
 
@@ -17,18 +17,77 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+
     - name: Setup NodeJs
       uses: actions/setup-node@v3
       with:
         node-version: 16
+
+    - name: Write Build Number
+      run: echo "1.0.${{ github.run_number }}"
+
     - name: Restore dependencies
       run: dotnet restore ./Gooi.sln
+
     - name: Build
-      run: dotnet build ./Gooi.sln --no-restore
+      run: dotnet build ./src/Gooi.CLI/Gooi.CLI.csproj --self-contained false && dotnet build ./tests/Gooi.Tests/Gooi.Tests.csproj
+
     - name: Install azurite
       run: npm install -g azurite
+
     - name: Run Azurite in Background
       shell: bash
       run: azurite --queueHost 127.0.0.1 --silent --location ./azurite --debug ./azurite/debug.log &
+
     - name: Test
-      run: dotnet test ./Gooi.sln --no-build --verbosity normal
+      run: dotnet test ./tests/Gooi.Tests/Gooi.Tests.csproj --no-build --verbosity normal
+
+    - name: Build Linux
+      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o linux-x64 -c release -r linux-x64 /p:Version="1.0.${{ github.run_number }}" --self-contained
+
+    - name: Build Windows
+      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o win7-x64 -c release -r win7-x64 /p:Version="1.0.${{ github.run_number }}" --self-contained
+
+    - name: Tar Linux files
+      shell: bash
+      run: tar -czvf Gooi-linux-x64.tar.gz linux-x64
+
+    - name: Zip Windows files
+      shell: bash
+      run: zip -r Gooi-win7-x64.zip win7-x64
+
+    - name: Check Built files
+      shell: bash
+      run: ls -la
+
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: "1.0.${{ github.run_number }}"
+        tag_name: "1.0.${{ github.run_number }}"
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: upload linux artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Gooi-linux-x64.tar.gz
+        asset_name: Gooi-linux-x64.tar.gz
+        asset_content_type: application/gzip
+
+    - name: upload windows artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Gooi-win7-x64.zip
+        asset_name: Gooi-win7-x64.zip
+        asset_content_type: application/zip

@@ -10,7 +10,14 @@
       "request": "launch",
       "preLaunchTask": "build",
       "program": "${workspaceFolder}/src/Gooi.CLI/bin/Debug/net6.0/Gooi.dll",
-      "args": [],
+      "args": [
+        "azure-queue",
+        "--message",
+        "Hello VSCode",
+        "--queue",
+        "demo","--connection",
+        "UseDevelopmentStorage=true"
+      ],
       "cwd": "${workspaceFolder}/src/Gooi.CLI",
       "console": "internalConsole",
       "stopAtEntry": false

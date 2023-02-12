@@ -8,7 +8,9 @@
     <ToolCommandName>gooi</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackAsTool>true</PackAsTool>
-    <Company>Derivco</Company>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <Company>leeroya.com</Company>
     <PackageProjectUrl>https://github.com/leeroya/Gooi.git</PackageProjectUrl>
     <RepositoryUrl>https://github.com/leeroya/Gooi.git</RepositoryUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

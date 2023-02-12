@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Skinder.Gooi.Core</AssemblyName>
     <RootNamespace>Skinder.Gooi.Core</RootNamespace>
+    <RuntimeIdentifiers>win10-x64;linux-x64</RuntimeIdentifiers>
     <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
 

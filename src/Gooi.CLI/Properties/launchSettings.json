@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Gooi.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "azure-queue --message \"Hello Visual Studio\" --queue \"demo\" --connection \"UseDevelopmentStorage=true\""
+    }
+  }
+}
