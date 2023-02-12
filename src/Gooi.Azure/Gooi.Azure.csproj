@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Skinder.Gooi.Azure</AssemblyName>
     <RootNamespace>Skinder.Gooi.Azure</RootNamespace>
+    <SelfContained>false</SelfContained>
   </PropertyGroup>
 
   <ItemGroup>

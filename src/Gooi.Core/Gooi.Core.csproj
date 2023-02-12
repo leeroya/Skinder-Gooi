@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Skinder.Gooi.Core</AssemblyName>
     <RootNamespace>Skinder.Gooi.Core</RootNamespace>
+    <SelfContained>false</SelfContained>
     <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
 
