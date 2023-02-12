@@ -50,15 +50,15 @@ jobs:
 
     - name: Tar Linux files
       shell: bash
-      run: tar -czvf ${GITHUB_WORKSPACE}/artifacts/Gooi.linux-x64.tar.gz ${GITHUB_WORKSPACE}/artifacts/linux-x64
+      run: tar -czvf Gooi-linux-x64.tar.gz ${GITHUB_WORKSPACE}/artifacts/linux-x64
 
     - name: Zip Windows files
       shell: bash
-      run: zip -r ${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip ${GITHUB_WORKSPACE}/artifacts/win7-x64
+      run: zip -r Gooi-win7-x64.zip ${GITHUB_WORKSPACE}/artifacts/win7-x64
 
     - name: Check Built files
       shell: bash
-      run: ls -la ${GITHUB_WORKSPACE}/artifacts
+      run: ls -la
 
     - name: release
       uses: actions/create-release@v1
@@ -78,9 +78,9 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip
-        asset_name: Gooi.linux-x64.tar
-        asset_content_type: application/tar
+        asset_path: ./Gooi-linux-x64.tar.gz
+        asset_name: Gooi-linux-x64.tar.gz
+        asset_content_type: application/gzip
 
     - name: upload windows artifact
       uses: actions/upload-release-asset@v1
@@ -88,6 +88,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip
-        asset_name: Gooi.win7-x64.zip
+        asset_path: ./Gooi-win7-x64.zip
+        asset_name: Gooi-win7-x64.zip
         asset_content_type: application/zip
