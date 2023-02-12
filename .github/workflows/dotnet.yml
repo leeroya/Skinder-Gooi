@@ -5,10 +5,7 @@ name: .NET
   #   branches: [ "main" ]
   # pull_request:
   #   branches: [ "main" ]
-on:
-  push:
-    branches:
-      - '*'
+on: [push]
 jobs:
   build:
 
