@@ -50,7 +50,7 @@ jobs:
 
     - name: Compress
       shell: bash
-      run: apt install zip && tar -zxvf ./artifacts/linux-x64/Gooi.linux-x64.tar.gz ./artifacts/linux-x64 && zip -r Gooi.win7-x64.zip ./artifacts/win7-x64
+      run: tar -zxvf ./artifacts/linux-x64/Gooi.linux-x64.tar.gz ./artifacts/linux-x64 && zip -r Gooi.win7-x64.zip ./artifacts/win7-x64
 
     - name: release
       uses: actions/create-release@v1
