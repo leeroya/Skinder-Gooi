@@ -30,7 +30,7 @@ jobs:
       run: dotnet restore ./Gooi.sln
 
     - name: Build
-      run: dotnet build ./src/Gooi.CLI/Gooi.CLI.csproj --self-contained false && dotnet build ./test/Gooi.Tests/Gooi.Tests.csproj
+      run: dotnet build ./src/Gooi.CLI/Gooi.CLI.csproj --self-contained false && dotnet build ./tests/Gooi.Tests/Gooi.Tests.csproj
 
     - name: Install azurite
       run: npm install -g azurite
@@ -40,7 +40,7 @@ jobs:
       run: azurite --queueHost 127.0.0.1 --silent --location ./azurite --debug ./azurite/debug.log &
 
     - name: Test
-      run: dotnet test ./test/Gooi.Tests/Gooi.Tests.csproj --no-build --verbosity normal
+      run: dotnet test ./tests/Gooi.Tests/Gooi.Tests.csproj --no-build --verbosity normal
 
     - name: Build Linux
       run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o ./artifacts/linux-x64 -c release -r linux-x64 /p:Version="${{ github.run_number }}" --self-contained
