@@ -48,9 +48,17 @@ jobs:
     - name: Build Windows
       run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o "${GITHUB_WORKSPACE}/artifacts/win7-x64" -c release -r win7-x64 /p:Version="${{ github.run_number }}" --self-contained
 
-    - name: Compress
+    - name: Tar Linux files
       shell: bash
-      run: tar -czvf ${GITHUB_WORKSPACE}/artifacts/Gooi.linux-x64.tar.gz ${GITHUB_WORKSPACE}/artifacts/linux-x64 && zip -r ${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip ${GITHUB_WORKSPACE}/artifacts/win7-x64 && ls -la ${GITHUB_WORKSPACE}/artifacts
+      run: tar -czvf ${GITHUB_WORKSPACE}/artifacts/Gooi.linux-x64.tar.gz ${GITHUB_WORKSPACE}/artifacts/linux-x64
+
+    - name: Zip Windows files
+      shell: bash
+      run: zip -r ${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip ${GITHUB_WORKSPACE}/artifacts/win7-x64
+
+    - name: Check Built files
+      shell: bash
+      run: ls -la ${GITHUB_WORKSPACE}/artifacts
 
     - name: release
       uses: actions/create-release@v1
@@ -70,7 +78,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Skinder-Gooi/artifacts/Gooi.linux-x64.tar.gz
+        asset_path: ${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip
         asset_name: Gooi.linux-x64.tar
         asset_content_type: application/tar
 
@@ -80,6 +88,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Skinder-Gooi/artifacts/Gooi.win7-x64.zip
+        asset_path: ${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip
         asset_name: Gooi.win7-x64.zip
         asset_content_type: application/zip
