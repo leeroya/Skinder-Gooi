@@ -1,11 +1,14 @@
 name: .NET
 
+# on:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+    tags:
+      - '*'
 jobs:
   build:
 
@@ -17,18 +20,69 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+
     - name: Setup NodeJs
       uses: actions/setup-node@v3
       with:
         node-version: 16
+
+    - name: Write Build Number
+      run: echo ${{ github.run_number }}
+
     - name: Restore dependencies
       run: dotnet restore ./Gooi.sln
+
     - name: Build
       run: dotnet build ./Gooi.sln --no-restore
+
     - name: Install azurite
       run: npm install -g azurite
+
     - name: Run Azurite in Background
       shell: bash
       run: azurite --queueHost 127.0.0.1 --silent --location ./azurite --debug ./azurite/debug.log &
+
     - name: Test
       run: dotnet test ./Gooi.sln --no-build --verbosity normal
+
+    - name: Build Linux
+      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o ./artifacts/linux-x64 -c release -r linux-x64 /p:Version="${{ github.run_number }}"
+
+    - name: Build Windows
+      run: dotnet publish ./src/Gooi.CLI/Gooi.CLI.csproj -o ./artifacts/win7-x64 -c release -r win7-x64 /p:Version="${{ github.run_number }}"
+
+    - name: Compress
+      shell: bash
+      run: apt install zip && tar -zxvf ./artifacts/linux-x64/Gooi.linux-x64.tar.gz ./artifacts/linux-x64 && zip -r Gooi.win7-x64.zip ./artifacts/win7-x64
+
+    - name: release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ github.run_number }}
+        tag_name: ${{ github.ref }}
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: upload linux artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./artifacts/linux-x64/Gooi.linux-x64.tar.gz
+        asset_name: Gooi.linux-x64.tar
+        asset_content_type: application/tar
+
+    - name: upload windows artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./artifacts/win7-x64/Gooi.win7-x64.zip
+        asset_name: Gooi.win7-x64.zip
+        asset_content_type: application/zip
