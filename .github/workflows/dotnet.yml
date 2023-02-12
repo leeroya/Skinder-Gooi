@@ -30,7 +30,7 @@ jobs:
       run: dotnet restore ./Gooi.sln
 
     - name: Build
-      run: dotnet build ./src/Gooi.CLI/Gooi.CLI.csproj --no-restore
+      run: dotnet build ./src/Gooi.CLI/Gooi.CLI.csproj -r linux-x64 --no-restore && dotnet build ./src/Gooi.CLI/Gooi.CLI.csproj -r win7-x64 --no-restore
 
     - name: Install azurite
       run: npm install -g azurite
