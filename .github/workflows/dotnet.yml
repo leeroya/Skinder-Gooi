@@ -7,7 +7,7 @@ name: .NET
   #   branches: [ "main" ]
 on:
   push:
-    tags:
+    branches:
       - '*'
 jobs:
   build:
