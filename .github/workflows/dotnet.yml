@@ -50,7 +50,7 @@ jobs:
 
     - name: Compress
       shell: bash
-      run: tar -zxvf "${GITHUB_WORKSPACE}/artifacts/Gooi.linux-x64.tar.gz" "${GITHUB_WORKSPACE}/artifacts/linux-x64" && zip -r "${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip" "${GITHUB_WORKSPACE}/artifacts/win7-x64"
+      run: tar -tzf "${GITHUB_WORKSPACE}/artifacts/Gooi.linux-x64.tar.gz" "${GITHUB_WORKSPACE}/artifacts/linux-x64" && zip -r "${GITHUB_WORKSPACE}/artifacts/Gooi.win7-x64.zip" "${GITHUB_WORKSPACE}/artifacts/win7-x64"
 
     - name: release
       uses: actions/create-release@v1
