@@ -10,7 +10,7 @@
     <PackAsTool>true</PackAsTool>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
-    <Company>Derivco</Company>
+    <Company>leeroya.com</Company>
     <PackageProjectUrl>https://github.com/leeroya/Gooi.git</PackageProjectUrl>
     <RepositoryUrl>https://github.com/leeroya/Gooi.git</RepositoryUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
