@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "type": "dotnet",
+            "name": "Gooi",
+            "projectPath": "src/Gooi.CLI/Gooi.CLI.csproj",
+            "exePath": "",
+            "args": [
+                "DE",
+                "azure-queue",
+                "--message",
+                "Hello Fleet",
+                "--queue",
+                "demo","--connection",
+                "UseDevelopmentStorage=true"
+            ],
+        },
+
+    ]
+}
