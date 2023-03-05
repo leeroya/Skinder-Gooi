@@ -13,6 +13,12 @@ public class AzureMessageCommandHandler : IRequestHandler<AzureQueueMessageComma
     {
         _outputWriter.WriteFaintLine("Azure message handling");
         QueueClient queue = new QueueClient(request.ConnectionString , request.Queue);
+        if (string.IsNullOrEmpty(request.Message))
+        {
+            _outputWriter.WriteError("Message was not passed, nothing was sent.");
+            return 1;
+        }
+
         await InsertMessageAsync(queue, request.Message, request.Expire);
         return 0;
     }
